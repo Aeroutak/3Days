@@ -1,15 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://SolidGrasslandTileset.tres" type="TileSet" id=1]
-[ext_resource path="res://player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://SolidGrasslandTileset.tres" type="TileSet" id=2]
 [ext_resource path="res://GoalFlower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=4]
 
 [node name="Lvl1-1" type="Node" index="0"]
 
-[node name="TileMap" type="TileMap" parent="." index="0"]
+[node name="player" parent="." index="0" instance=ExtResource( 1 )]
+
+position = Vector2( 32, 96 )
+
+[node name="TileMap" type="TileMap" parent="." index="1"]
 
 mode = 0
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 16
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -27,12 +32,12 @@ format = 1
 tile_data = PoolIntArray( 131080, 0, 0, 131081, 5, 0, 131082, 5, 0, 131083, 5, 0, 131084, 4, 0, 262144, 10, 0, 262145, 2, 0, 262146, 2, 0, 262147, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 11, 0, 262160, 0, 0, 262161, 4, 0, 327680, 6, 0, 327681, 7, 0, 327682, 7, 0, 327683, 7, 0, 327684, 7, 0, 327685, 14, 0, 327686, 15, 0, 393216, 6, 0, 393217, 7, 0, 393218, 7, 0, 393219, 7, 0, 393220, 14, 0, 393221, 15, 0, 393228, 0, 0, 393229, 4, 0, 458752, 12, 0, 458753, 9, 0, 458754, 9, 0, 458755, 9, 0, 458756, 15, 0, 524302, 10, 0, 524303, 2, 0, 524304, 2, 0, 524305, 2, 0, 524306, 2, 0, 524307, 2, 0, 524308, 11, 0, 589836, 10, 0, 589837, 2, 0, 589838, 7, 0, 589839, 7, 0, 589840, 7, 0, 589841, 7, 0, 589842, 7, 0, 589843, 7, 0, 589844, 8, 0, 655360, 0, 0, 655361, 5, 0, 655362, 5, 0, 655363, 5, 0, 655364, 5, 0, 655365, 5, 0, 655366, 5, 0, 655367, 4, 0, 655370, 10, 0, 655371, 2, 0, 655372, 7, 0, 655373, 7, 0, 655374, 7, 0, 655375, 7, 0, 655376, 7, 0, 655377, 7, 0, 655378, 7, 0, 655379, 7, 0, 655380, 8, 0, 720906, 6, 0, 720907, 7, 0, 720908, 7, 0, 720909, 7, 0, 720910, 7, 0, 720911, 7, 0, 720912, 7, 0, 720913, 7, 0, 720914, 7, 0, 720915, 7, 0, 720916, 8, 0, 786442, 12, 0, 786443, 9, 0, 786444, 9, 0, 786445, 9, 0, 786446, 9, 0, 786447, 9, 0, 786448, 9, 0, 786449, 9, 0, 786450, 9, 0, 786451, 9, 0, 786452, 15, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="player" parent="." index="1" instance=ExtResource( 2 )]
-
-position = Vector2( 96, 96 )
-
 [node name="GoalFlower" parent="." index="2" instance=ExtResource( 3 )]
 
 lvl_scene = "res://Lvl1-2.tscn"
+
+[node name="enemy" parent="." index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 362.988, 47.3635 )
 
 

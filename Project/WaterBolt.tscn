@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Water Bolt.gd" type="Script" id=1]
+[ext_resource path="res://WaterBolt.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Attack/Mage_Attack_1.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Attack/Mage_Attack_2.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 8, 3.5 )
+extents = Vector2( 16, 8 )
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -15,14 +15,11 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Water Bolt",
-"speed": 8.0
+"speed": 6.0
 } ]
 
-[node name="Water Bolt" type="Node2D"]
+[node name="WaterBolt" type="Area2D" index="0"]
 
-[node name="Water Bolt" type="Area2D" parent="." index="0"]
-
-scale = Vector2( 2, 2 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -31,26 +28,26 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Water Bolt" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( 0, 0.5 )
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Water Bolt" index="1"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
+scale = Vector2( 2, 2 )
 frames = SubResource( 2 )
 animation = "Water Bolt"
+_sections_unfolded = [ "Transform" ]
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Water Bolt" index="2"]
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="2"]
 
 rect = Rect2( -10, -10, 20, 20 )
 
-[connection signal="screen_exited" from="Water Bolt/VisibilityNotifier2D" to="Water Bolt" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="body_entered" from="." to="." method="_on_WaterBolt_body_entered"]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 

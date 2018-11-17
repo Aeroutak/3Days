@@ -3,15 +3,15 @@
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/tile000.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Player/tile001.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Player/tile004.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/tile011.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/tile007.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/tile008.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/tile009.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/tile010.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/tile012.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/tile029.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Player/tile031.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Player/tile012.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/tile029.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/tile031.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/tile004.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/tile010.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/tile007.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/tile008.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/tile009.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/tile011.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Player/tile028.png" type="Texture" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -22,36 +22,37 @@ animations = [ {
 "name": "Idle",
 "speed": 1.2
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Spell",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "Death",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "Fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "Spell",
-"speed": 10.0
+"name": "Walk",
+"speed": 6.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Dash",
 "speed": 7.0
 } ]
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 
@@ -77,7 +78,6 @@ __meta__ = {
 scale = Vector2( 3, 3 )
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 1
 offset = Vector2( 0, 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -89,16 +89,15 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Position2D" type="Position2D" parent="." index="2"]
 
-position = Vector2( 24, 7 )
+position = Vector2( 50, 7 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 
-scale = Vector2( 0.5, 0.5 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 1, 1 )
+zoom = Vector2( 0.8, 0.8 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -115,8 +114,16 @@ drag_margin_top = 0.2
 drag_margin_right = 0.2
 drag_margin_bottom = 0.2
 editor_draw_screen = true
-editor_draw_limits = false
+editor_draw_limits = true
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="4"]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 
